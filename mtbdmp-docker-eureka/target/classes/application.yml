@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka7001
+server:
+  port: 7001
+eureka:
+  client:
+    register-with-eureka: false     #false:不作为一个客户端注册到注册中心
+    fetch-registry: false     #意思是不作为微服务注册到eureka中，默认为true
+    #为true时，可以启动，但报异常：Cannot execute request on any known server
+    service-url:
+      defaultZone: http://192.168.3.233:7001/eureka  #默认注册到8761端口，不写的话会报错
+  instance:
+    prefer-ip-address: true  #表示微服务显示IP

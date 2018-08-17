@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: zuul9001               #微服务调用时的名字
+server:
+  port: 9001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka/   #Eureka的地址
+  instance:
+    instance-id: zuul9001   #注册到eureka中的名字
+    prefer-ip-address: true #表示微服务显示IP
+zuul:
+  ignored-services: "*"  #表示忽略所有微服务的名字，通过下面匹配的路径去访问
+  prefix: /api        #为zuul设置一个公共的前缀
+  routes:
+    test:
+      path: /business/**    #表示拦截/api/business/的所有请求
+      service-id: buiness8001  #对应business微服务中的spring.application.name ,这句很重要，不配置或者配置错误，通过zuul访问服务提供者将失败
